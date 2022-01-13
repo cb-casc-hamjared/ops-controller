@@ -4,7 +4,7 @@ id: "cb-casc-hamjared-ops-controller"
 description: "CloudBees CI configuration bundle for the cb-casc-hamjared ops-controller Controller"
 availabilityPattern: "cloudbees-ci-casc-workshop/cb-casc-hamjared/ops-controller"
 jcasc:
-  - "jenkins.yaml"
+  - "jcasc/"
 plugins:
   - "plugins.yaml"
 items:
