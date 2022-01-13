@@ -1,60 +1,44 @@
-kind: folder
-displayName: controller-jobs
-name: controller-jobs
-description: ''
+removeStrategy:
+  rbac: SYNC
+  items: NONE
 items:
-- orphanedItemStrategy:
-    defaultOrphanedItemStrategy:
-      pruneDeadBranches: true
-      daysToKeep: -1
-      numToKeep: -1
-  kind: organizationFolder
-  displayName: controller-casc-update
-  name: controller-casc-update
-  navigators:
-  - github:
-      apiUri: https://api.github.com
-      traits:
-      - gitHubBranchDiscovery:
-          strategyId: 1
-      - headWildcardFilter:
-          excludes: ''
-          includes: main
-      repoOwner: cb-casc-hamjared
-      credentialsId: cloudbees-ci-casc-workshop-github-app
-  projectFactories:
-  - customMultiBranchProjectFactory:
-      factory:
-        customBranchProjectFactory:
-          marker: Jenkinsfile
-          definition:
-            cpsScmFlowDefinition:
-              scriptPath: controller-casc-update
-              scm:
-                gitSCM:
-                  userRemoteConfigs:
-                  - userRemoteConfig:
-                      credentialsId: cloudbees-ci-casc-workshop-github-app
-                      url: https://github.com/cb-casc-hamjared/ops-controller.git
-                  branches:
-                  - branchSpec:
-                      name: '*/main'
-              lightweight: true
-  trigger:
-    periodicFolderTrigger:
-      interval: 1d
-  strategy:
-    allBranchesSame: {
-      }
-properties:
-- envVars: {
-    }
-- kubernetesFolderProperty: {
-    }
-- itemRestrictions:
-    allowedTypes:
-    - org.jenkinsci.plugins.workflow.job.WorkflowJob
-    - hudson.model.FreeStyleProject
-    - jenkins.branch.OrganizationFolder
-    - org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject
-    filter: true
+- kind: folder
+  displayName: controller-jobs
+  name: controller-jobs
+  items:
+  - kind: organizationFolder
+    name: controller-casc-update
+    orphanedItemStrategy:
+      defaultOrphanedItemStrategy:
+        pruneDeadBranches: true
+        daysToKeep: -1
+        numToKeep: -1
+    navigators:
+    - github:
+        apiUri: https://api.github.com
+        traits:
+        - gitHubBranchDiscovery:
+            strategyId: 1
+        - headWildcardFilter:
+            excludes: ''
+            includes: main
+        repoOwner: cb-casc-hamjared
+        credentialsId: cloudbees-ci-casc-workshop-github-app
+    projectFactories:
+    - customMultiBranchProjectFactory:
+        factory:
+          customBranchProjectFactory:
+            marker: Jenkinsfile
+            definition:
+              cpsScmFlowDefinition:
+                scriptPath: controller-casc-update
+                scm:
+                  gitSCM:
+                    userRemoteConfigs:
+                    - userRemoteConfig:
+                        credentialsId: cloudbees-ci-casc-workshop-github-app
+                        url: https://github.com/cb-casc-hamjared/ops-controller.git
+                    branches:
+                    - branchSpec:
+                        name: '*/main'
+                lightweight: true
