@@ -40,7 +40,7 @@ items:
     - customMultiBranchProjectFactory:
         factory:
           customBranchProjectFactory:
-            marker: controller-casc-update
+            marker: bundle.yaml
             definition:
               cpsScmFlowDefinition:
                 scriptPath: controller-casc-update
